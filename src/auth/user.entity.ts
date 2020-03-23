@@ -17,8 +17,8 @@ export class User extends BaseEntity {
     @Column()
     salt: string;
 
-    // @OneToMany(type => TaskEntity, taskEntity => taskEntity.user, { eager: true })
-    // task: TaskEntity[];
+    @OneToMany(type => Task, task => task.user, { eager: true })
+    task: Task[];
 
     async validatePassword(password: string): Promise<boolean> {
         const hash = await bcrypt.hash(password, this.salt);
