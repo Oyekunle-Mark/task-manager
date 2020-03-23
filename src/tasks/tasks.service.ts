@@ -3,7 +3,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskRepository } from './task.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TaskEntity } from './task.entity';
+import { Task } from './task.entity';
 import { TaskStatus } from './task-status.enum';
 
 @Injectable()
@@ -13,11 +13,11 @@ export class TasksService {
         private taskRepository: TaskRepository,
     ) { }
 
-    async getTasks(filterDto: GetTasksFilterDto): Promise<TaskEntity[]>{
+    async getTasks(filterDto: GetTasksFilterDto): Promise<Task[]>{
         return this.taskRepository.getTasks(filterDto);
     }
 
-    async getTaskById(id: number): Promise<TaskEntity> {
+    async getTaskById(id: number): Promise<Task> {
         const found = await this.taskRepository.findOne(id);
 
         if (!found) {
@@ -27,7 +27,7 @@ export class TasksService {
         return found;
     }
 
-    async createTask(createTaskDto: CreateTaskDto): Promise<TaskEntity> {
+    async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
         return this.taskRepository.createTask(createTaskDto);
     }
 
@@ -39,7 +39,7 @@ export class TasksService {
         }
     }
 
-    async updateTaskStatus(id: number, status: TaskStatus): Promise<TaskEntity> {
+    async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
         const task = await this.getTaskById(id);
         task.status = status;
         await task.save();
