@@ -11,7 +11,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   if (process.env.NODE_ENV === 'development') {
-    console.log("****************** In dev mode.");
     app.enableCors()
   }
 
