@@ -55,8 +55,12 @@ describe('UserRepository', () => {
             user.validatePassword = jest.fn();
         })
  
-        it('returns the username and the validation is successful', () => {
+        it('returns the username and the validation is successful', async () => {
+            userRepository.findOne.mockResolvedValue(user);
+            user.validatePassword.mockResolvedValue(true);
 
+            const result = await userRepository.validateUserPassword(mockCredentialsDto);
+            expect(result).toEqual('TestUsername');
         });
 
         it('returns null as user cannot be found', () => {
