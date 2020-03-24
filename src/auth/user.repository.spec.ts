@@ -1,6 +1,7 @@
 import { Test } from "@nestjs/testing";
 import { UserRepository } from "./user.repository";
 import { ConflictException, InternalServerErrorException } from "@nestjs/common";
+import { User } from "./user.entity";
 
 const mockCredentialsDto = { username: 'TestUsername', password: 'TestPassword' };
 
@@ -45,12 +46,21 @@ describe('UserRepository', () => {
     })
 
     describe('valideUserPassword', () => {
+        let user;
+
+        beforeEach(() => {
+            userRepository.findOne = jest.fn();
+            user = new User();
+            user.username = 'TestUsername';
+            user.validatePassword = jest.fn();
+        })
+ 
         it('returns the username and the validation is successful', () => {
 
         });
 
         it('returns null as user cannot be found', () => {
-            
+
         })
 
         it('returns null as password is invalid', () => {
