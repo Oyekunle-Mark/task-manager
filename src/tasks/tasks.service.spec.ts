@@ -83,8 +83,14 @@ describe('TasksService', () => {
     });
 
     describe('deleteTask', () => {
-        it('calls taskRepository.delete() to delete task', () =>{
+        it('calls taskRepository.delete() to delete task', async () => {
+            taskRepository.delete.mockResolvedValue({ affected: 1 });
 
+            expect(taskRepository.delete).not.toHaveBeenCalled();
+
+            await tasksService.deleteTask(1, mockUser);
+
+            expect(taskRepository.delete).toHaveBeenCalledWith({ id: 1, userId: mockUser.id })
         });
 
         it('throws and error as task could not be found', () => {
