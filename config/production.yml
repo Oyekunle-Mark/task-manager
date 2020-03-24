@@ -1,2 +1,5 @@
+server:
+  origin: http://task-management-frontend-chief-oye.s3-website.eu-west-3.amazonaws.com
+
 db:
   synchronize: false
