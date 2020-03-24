@@ -99,4 +99,10 @@ describe('TasksService', () => {
             expect(tasksService.deleteTask(1, mockUser)).rejects.toThrow(NotFoundException);
         });
     });
+
+    describe('updateTask', () => {
+        it('updates a task status', () => {
+
+        });
+    });
 });
