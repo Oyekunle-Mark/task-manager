@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing';
+import { UnauthorizedException } from '@nestjs/common';
 import { JwtStrategy } from './jwt.strategy';
 import { UserRepository } from './user.repository';
 import { User } from './user.entity';
@@ -29,14 +30,16 @@ describe('JwtStrategy', () => {
             user.username = 'TestUser';
 
             userRepository.findOne.mockResolvedValue(user);
-            const result = await userRepository.validate({ username: 'TestUser' });
+            const result = await jwtStrategy.validate({ username: 'TestUser' });
 
             expect(userRepository.findOne).toHaveBeenCalledWith({ username: 'TestUser' });
             expect(result).toEqual(user);
         });
 
-        it('throws and unathorized as user cannot be found', async () => {
+        it('throws and unauthorized as user cannot be found', async () => {
+            userRepository.findOne.mockResolvedValue(null);
 
+            expect(jwtStrategy.validate({ username: 'TestUser' })).rejects.toThrow(UnauthorizedException);
         });
     });
 });
