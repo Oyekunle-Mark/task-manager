@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskRepository } from './task.repository';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -59,7 +60,9 @@ describe('TasksService', () => {
         });
 
         it('throws an error as task is not found', () => {
+            taskRepository.findOne.mockResolvedValue(null);
 
+            expect(tasksService.getTaskById(1, mockUser)).rejects.toThrow(NotFoundException);
         });
     });
 });
