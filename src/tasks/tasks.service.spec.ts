@@ -39,5 +39,16 @@ describe('TasksService', () => {
             expect(result).toEqual('someValue');
         });
 
-    })
+    });
+
+    describe('getTaskById', () => {
+        it('it calls taskRepository.findOne() and successfully returns the task', () => {
+
+        });
+
+        it('throws an error as task is not found', () => {
+
+        });
+    });
 });
+ 
