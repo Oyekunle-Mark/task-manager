@@ -1,6 +1,6 @@
 import { Test } from "@nestjs/testing";
 import { UserRepository } from "./user.repository";
-import { ConflictException } from "@nestjs/common";
+import { ConflictException, InternalServerErrorException } from "@nestjs/common";
 
 const mockCredentialsDto = { username: 'TestUsername', password: 'TestPassword' };
 
@@ -34,8 +34,13 @@ describe('UserRepository', () => {
         });
 
         it('throws a conflict exception when username already exists', () => {
-            save.mockResolvedValue({ code: '23505' });
+            save.mockRejectedValue({ code: '23505' });
             expect(userRepository.signUp(mockCredentialsDto)).rejects.toThrow(ConflictException);
+        });
+
+        it('throws a internal server error exception with error during creation', () => {
+            save.mockRejectedValue({ code: '1345' });
+            expect(userRepository.signUp(mockCredentialsDto)).rejects.toThrow(InternalServerErrorException);
         })
     })
 });
