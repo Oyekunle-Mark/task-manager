@@ -11,6 +11,7 @@ const mockTaskRepository = () => ({
     getTasks: jest.fn(),
     findOne: jest.fn(),
     createTask: jest.fn(),
+    delete: jest.fn(),
 })
 
 describe('TasksService', () => {
