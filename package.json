@@ -59,7 +59,7 @@
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "25.2.1",
-    "tsconfig-paths": "^3.9.0",
+    "tsconfig-paths": "^3.9.0"
   },
   "jest": {
     "moduleFileExtensions": [
