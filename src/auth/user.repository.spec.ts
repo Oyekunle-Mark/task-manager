@@ -41,6 +41,20 @@ describe('UserRepository', () => {
         it('throws a internal server error exception with error during creation', () => {
             save.mockRejectedValue({ code: '1345' });
             expect(userRepository.signUp(mockCredentialsDto)).rejects.toThrow(InternalServerErrorException);
-        })
+        });
     })
+
+    describe('valideUserPassword', () => {
+        it('returns the username and the validation is successful', () => {
+
+        });
+
+        it('returns null as user cannot be found', () => {
+            
+        })
+
+        it('returns null as password is invalid', () => {
+
+        })
+    });
 });
