@@ -1,6 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { TasksService } from './tasks.service';
 import { TaskRepository } from './task.repository';
+import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { TaskStatus } from './task-status.enum';
+
+const mockUser = { username: 'Test User' };
 
 const mockTaskRepository = () => ({
     getTasks: jest.fn()
@@ -24,7 +28,9 @@ describe('TasksService', () => {
 
     describe('getTasks', () => {
         it('gets all tasks from the repository', () => {
-            expect(taskRepository.getTasks).not.toHaveBeenCalled(); 
+            expect(taskRepository.getTasks).not.toHaveBeenCalled();
         })
+
+        const filters: GetTasksFilterDto = { status: TaskStatus.IN_PROGRESS, search: 'Some search query' }
     })
 });
