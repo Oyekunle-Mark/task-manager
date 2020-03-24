@@ -80,4 +80,14 @@ describe('TasksService', () => {
             expect(result).toEqual('someValue');
         });
     });
+
+    describe('deleteTask', () => {
+        it('calls taskRepository.delete() to delete task', () =>{
+
+        });
+
+        it('throws and error as task could not be found', () => {
+
+        });
+    });
 });
