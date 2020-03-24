@@ -25,9 +25,11 @@ describe('UserRepository', () => {
             userRepository.create = jest.fn().mockReturnValue({
                 save
             });
-        })
-        it('successfully signs up the user', async () => {
+        });
 
-        })
+        it('successfully signs up the user', async () => {
+            save.mockResolvedValue(undefined);
+            expect(userRepository.signUp(mockCredentialsDto)).resolves.not.toThrow();
+        });
     })
 });
