@@ -29,8 +29,11 @@ describe('TasksService', () => {
     describe('getTasks', () => {
         it('gets all tasks from the repository', () => {
             expect(taskRepository.getTasks).not.toHaveBeenCalled();
-        })
 
-        const filters: GetTasksFilterDto = { status: TaskStatus.IN_PROGRESS, search: 'Some search query' }
+            const filters: GetTasksFilterDto = { status: TaskStatus.IN_PROGRESS, search: 'Some search query' };
+            tasksService.getTasks(filters, mockUser);
+            expect(taskRepository.getTasks).toHaveBeenCalled();
+        });
+
     })
 });
