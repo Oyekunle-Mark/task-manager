@@ -10,9 +10,17 @@ describe('UserEntity', () => {
         user.salt = 'testSalt';
         bcrypt.hash = jest.fn();
     });
-    describe('validatePassword', () => {
-        it('returns true as password is valid', () => {
 
+    describe('validatePassword', () => {
+        it('returns true as password is valid', async () => {
+            bcrypt.hash.mockResolvedValue('testPassword');
+
+            expect(bcrypt.hash).not.toHaveBeenCalled();
+
+            const result = await user.validatePassword('password');
+
+            expect(bcrypt.hash).toHaveBeenCalledWith('password', 'testSalt');
+            expect(result).toEqual(true);
         });
 
         it('returns false as password is not valid', () => {
