@@ -17,6 +17,17 @@ describe('UserRepository', () => {
     });
 
     describe('signUp', () => {
-        
+        let save;
+
+        beforeEach(async () => {
+            save = jest.fn();
+
+            userRepository.create = jest.fn().mockReturnValue({
+                save
+            });
+        })
+        it('successfully signs up the user', async () => {
+
+        })
     })
 });
