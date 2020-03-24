@@ -1,5 +1,6 @@
 import { Test } from "@nestjs/testing";
 import { UserRepository } from "./user.repository";
+import { ConflictException } from "@nestjs/common";
 
 const mockCredentialsDto = { username: 'TestUsername', password: 'TestPassword' };
 
@@ -27,9 +28,14 @@ describe('UserRepository', () => {
             });
         });
 
-        it('successfully signs up the user', async () => {
+        it('successfully signs up the user', () => {
             save.mockResolvedValue(undefined);
             expect(userRepository.signUp(mockCredentialsDto)).resolves.not.toThrow();
         });
+
+        it('throws a conflict exception when username already exists', () => {
+            save.mockResolvedValue({ code: '23505' });
+            expect(userRepository.signUp(mockCredentialsDto)).rejects.toThrow(ConflictException);
+        })
     })
 });
