@@ -94,7 +94,9 @@ describe('TasksService', () => {
         });
 
         it('throws and error as task could not be found', () => {
+            taskRepository.delete.mockResolvedValue({ affected: 0 });
 
+            expect(tasksService.deleteTask(1, mockUser)).rejects.toThrow(NotFoundException);
         });
     });
 });
