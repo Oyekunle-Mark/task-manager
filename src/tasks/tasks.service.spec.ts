@@ -1,6 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { TasksService } from './tasks.service';
 
+const mockTaskRepository = () => ({
+
+})
+
 describe('TasksService', () => {
     let tasksService;
     let taskRepository;
