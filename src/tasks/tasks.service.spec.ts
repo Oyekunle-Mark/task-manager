@@ -7,7 +7,8 @@ import { TaskStatus } from './task-status.enum';
 const mockUser = { username: 'Test User' };
 
 const mockTaskRepository = () => ({
-    getTasks: jest.fn()
+    getTasks: jest.fn(),
+    findOne: jest.fn(),
 })
 
 describe('TasksService', () => {
