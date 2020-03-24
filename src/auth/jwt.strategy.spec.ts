@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { JwtStrategy } from './jwt.strategy';
 import { UserRepository } from './user.repository';
+import { User } from './user.entity';
 
 const mockUserRepository = () => ({
     findOne: jest.fn(),
@@ -24,7 +25,14 @@ describe('JwtStrategy', () => {
 
     describe('validate', () => {
         it('validates and returns the user based on JWT payload', async () => {
+            const user = new User();
+            user.username = 'TestUser';
 
+            userRepository.findOne.mockResolvedValue(user);
+            const result = await userRepository.validate({ username: 'TestUser' });
+
+            expect(userRepository.findOne).toHaveBeenCalledWith({ username: 'TestUser' });
+            expect(result).toEqual(user);
         });
 
         it('throws and unathorized as user cannot be found', async () => {
