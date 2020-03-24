@@ -21,4 +21,14 @@ describe('JwtStrategy', () => {
         jwtStrategy = await module.get<JwtStrategy>(JwtStrategy);
         userRepository = await module.get<UserRepository>(UserRepository);
     });
+
+    describe('validate', () => {
+        it('validates and returns the user based on JWT payload', async () => {
+
+        });
+
+        it('throws and unathorized as user cannot be found', async () => {
+
+        });
+    });
 });
