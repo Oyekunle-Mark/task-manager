@@ -102,7 +102,10 @@ describe('TasksService', () => {
 
     describe('updateTask', () => {
         it('updates a task status', () => {
-
+            tasksService.getTaskById = jest.fn().mockResolvedValue({
+                status: TaskStatus.OPEN,
+                save: jest.fn().mockRejectedValue(true),
+            });
         });
     });
 });
