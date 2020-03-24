@@ -72,8 +72,14 @@ describe('UserRepository', () => {
             expect(result).toBeNull();
         })
 
-        it('returns null as password is invalid', () => {
+        it('returns null as password is invalid', async () => {
+            userRepository.findOne.mockResolvedValue(user);
+            user.validatePassword.mockResolvedValue(false);
 
+            const result = await userRepository.validateUserPassword(mockCredentialsDto);
+
+            expect(user.validateUserPassword).toHaveBeenCalled();
+            expect(result).toBeNull();
         })
     });
 });
